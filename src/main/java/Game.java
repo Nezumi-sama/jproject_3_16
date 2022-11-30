@@ -1,35 +1,33 @@
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Game {
-    private ArrayList<Player> playerList = new ArrayList<>();
+    private HashMap<String, Player> playerMap = new HashMap<>();
 
-    public ArrayList<Player> findAll(){
-        return playerList;
+    public HashMap<String, Player> findAll() {
+        return playerMap;
     }
 
     public void register(Player player) {
         boolean flag = false;
-        for (Player namePlayer : playerList) {
-            if (player.getId() == namePlayer.getId()) {
+        for (String namePlayer : playerMap.keySet()) {
+            if (player.getName() == namePlayer) {
                 flag = true;
             }
         }
 
         if (!flag) {
-            playerList.add(player);
+            playerMap.put(player.getName(), player);
         }
     }
 
-
     public Player findByName(String name) {
-        for (Player item : playerList) {
-            if (item.getName() == name) {
-                return item;
+        for (String namePlayer : playerMap.keySet()) {
+            if (namePlayer == name) {
+                return playerMap.get(namePlayer);
             }
         }
         return null;
     }
-
 
     public int round(String playerName1, String playerName2) {
         if ((findByName(playerName1) == null) || (findByName(playerName2) == null)) {

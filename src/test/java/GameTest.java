@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,48 +11,37 @@ class GameTest {
     Player player4 = new Player(4, "player4", 185);
     Player player5 = new Player(5, "player5", 428);
 
- /*   @Test
-    void shouldFindAll() {
-        Game game = new Game();
-        game.register(player1);
-        game.register(player2);
-        game.register(player1);
-
-        ArrayList<Player> expected = (player1, player2, player3);
-        ArrayList<Player> actual = game.findAll();
-
-        assertEquals(expected, actual);
-    }*/
-
     @Test
     void shouldNoRegister() {
-        ArrayList<Player> playerList = new ArrayList<>();
+        HashMap<String, Player> playerMap = new HashMap<>();
         Game game = new Game();
-        playerList.add(player1);
-        playerList.add(player2);
-        playerList.add(player3);
+
+        playerMap.put("player1", player1);
+        playerMap.put("player2", player2);
+        playerMap.put("player3", player3);
 
         game.register(player1);
         game.register(player2);
         game.register(player3);
-        ArrayList<Player> expected = playerList;
-        ArrayList<Player> actual = game.findAll();
+        HashMap<String, Player> expected = playerMap;
+        HashMap<String, Player> actual = game.findAll();
 
         assertEquals(expected, actual);
     }
 
     @Test
     void shouldAlreadyRegister() {
-        ArrayList<Player> playerList = new ArrayList<>();
+        HashMap<String, Player> playerMap = new HashMap<>();
         Game game = new Game();
-        playerList.add(player1);
-        playerList.add(player2);
+
+        playerMap.put("player1", player1);
+        playerMap.put("player2", player2);
 
         game.register(player1);
         game.register(player2);
-        game.register(player1);
-        ArrayList<Player> expected = playerList;
-        ArrayList<Player> actual = game.findAll();
+        game.register(player2);
+        HashMap<String, Player> expected = playerMap;
+        HashMap<String, Player> actual = game.findAll();
 
         assertEquals(expected, actual);
 
@@ -68,6 +57,7 @@ class GameTest {
         Player actual = player2;
 
         assertEquals(expected, actual);
+
     }
 
     @Test
@@ -80,6 +70,7 @@ class GameTest {
         Player actual = null;
 
         assertEquals(expected, actual);
+
     }
 
     @Test
